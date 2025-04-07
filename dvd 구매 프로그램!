@@ -1,0 +1,63 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+using namespace std;
+
+int main() {
+    string manu[] = { "액션 DVD", "코미디 DVD", "드라마 DVD", "SF DVD", "애니메이션 DVD" };
+    int price[] = { 12000, 15000, 11000, 16000, 13000 };
+
+    int num;
+    int total = 0;
+    int* ptotal = &total;
+    string confirm;
+    int quantity = 0;
+
+    
+
+    while (true) {
+        cout << "\n***** DVD 주문 프로그램 *****\n";
+        for (int i = 0; i < 5; i++) {
+            cout << i + 1 << ". " << manu[i] << " (" << price[i] << "원)\n";
+        }
+
+        cout << "\n구매하실 DVD 번호를 입력하세요(종료는 0): ";
+        cin >> num;
+
+        if (num == 0) {
+            cout << "\n총 금액은 " << *ptotal << "원 입니다.\n";
+            cout << "\n프로그램을 종료합니다.\n";
+            break;
+        }
+
+        if (num >= 1 && num <= 5) {
+            cout << "\n" << manu[num - 1] << "를 구매하시겠습니까? (y/n): ";
+            cin >> confirm;
+
+            if (confirm == "y" || confirm == "Y") {
+                cout << "구매하실 DVD 개수를 입력해주세요: ";
+                cin >> quantity;
+
+                if (quantity > 0) {
+                    int itemTotal = price[num - 1] * quantity;
+                    int* pItemTotal = &itemTotal;
+
+                    *ptotal += *pItemTotal;
+
+                    cout << manu[num - 1] << " " << quantity << "개를 구매하셨습니다.\n";
+                    cout << "가격은 " << *ptotal << "원 입니다.\n\n";
+                }
+                else {
+                    cout << "잘못된 수량입니다.\n\n";
+                }
+            }
+            else {
+                cout << "메인메뉴로 돌아갑니다.\n\n";
+            }
+        }
+        else {
+            cout << "올바른 번호를 입력하세요.\n\n";
+        }
+    }
+
+    return 0;
+}
