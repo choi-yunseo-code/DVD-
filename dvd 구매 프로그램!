@@ -2,17 +2,18 @@
 #include <iostream>
 using namespace std;
 
+void Total(int* total, int price, int quantity) {
+    *total += price * quantity;
+}
+
 int main() {
     string manu[] = { "액션 DVD", "코미디 DVD", "드라마 DVD", "SF DVD", "애니메이션 DVD" };
     int price[] = { 12000, 15000, 11000, 16000, 13000 };
 
     int num;
-    int total = 0;
-    int* ptotal = &total;
+    int total = 0;  
     string confirm;
     int quantity = 0;
-
-    
 
     while (true) {
         cout << "\n***** DVD 주문 프로그램 *****\n";
@@ -24,7 +25,7 @@ int main() {
         cin >> num;
 
         if (num == 0) {
-            cout << "\n총 금액은 " << *ptotal << "원 입니다.\n";
+            cout << "\n총 금액은 " << total << "원 입니다.\n";
             cout << "\n프로그램을 종료합니다.\n";
             break;
         }
@@ -38,13 +39,10 @@ int main() {
                 cin >> quantity;
 
                 if (quantity > 0) {
-                    int itemTotal = price[num - 1] * quantity;
-                    int* pItemTotal = &itemTotal;
-
-                    *ptotal += *pItemTotal;
+                    Total(&total, price[num - 1], quantity);
 
                     cout << manu[num - 1] << " " << quantity << "개를 구매하셨습니다.\n";
-                    cout << "가격은 " << *ptotal << "원 입니다.\n\n";
+                    cout << "가격은 " << price[num-1]*quantity << "원 입니다.\n\n";
                 }
                 else {
                     cout << "잘못된 수량입니다.\n\n";
